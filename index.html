@@ -1,0 +1,1477 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Burntwax Collective</title>
+  <meta name="description" content="Indie game studio and Unity Asset Store publisher.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@300;400;600&display=swap"
+    rel="stylesheet">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+
+
+  <style>
+    /* ============================================
+       CSS VARIABLES — Edit these to change the 
+       entire site's look and feel quickly
+       ============================================ */
+    :root {
+      --bg-deep: #0a0e1a;
+      --bg-surface: #0f1525;
+      --bg-card: #141c2e;
+      --bg-card-hover: #1a2440;
+
+      --accent: #f0845e;
+      /* Salmon/orange — primary brand color */
+      --accent-dim: #f0845e33;
+      --accent-glow: #f0845e66;
+      --accent-secondary: #2a4a8a;
+      /* Navy blue highlight */
+
+      --text-primary: #e8eaf0;
+      --text-secondary: #8a92a8;
+      --text-dim: #4e5672;
+
+      --font-display: 'Chakra Petch', sans-serif;
+      --font-body: 'Source Sans 3', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+
+      --border: #1c2640;
+      --border-glow: #f0845e22;
+
+      --max-width: 1200px;
+      --section-pad: 120px;
+    }
+
+    /* ============================================
+       RESET & BASE
+       ============================================ */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg-deep);
+      color: var(--text-primary);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+
+    a:hover {
+      opacity: 0.8;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ============================================
+       BACKGROUND ATMOSPHERE
+       ============================================ */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 10%, #0d1a3a66 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 80%, #1a243e55 0%, transparent 60%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Noise texture overlay */
+    body::after {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ============================================
+       NAVIGATION
+       ============================================ */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+      padding: 0 40px;
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(10, 14, 26, 0.85);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.2rem;
+      letter-spacing: 0.08em;
+      color: var(--text-primary);
+      /* text-transform: uppercase; */
+    }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+      opacity: 1;
+    }
+
+    /* Mobile nav toggle */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: var(--text-primary);
+      margin: 5px 0;
+      transition: 0.3s;
+    }
+
+    /* ============================================
+       SECTIONS — SHARED
+       ============================================ */
+    section {
+      position: relative;
+      z-index: 1;
+      padding: var(--section-pad) 40px;
+    }
+
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      margin-bottom: 16px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 24px;
+    }
+
+    .section-desc {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 600px;
+      line-height: 1.8;
+    }
+
+    .section-desc-long {
+      color: var(--text-secondary);
+      font-size: 1.1rem;
+      max-width: 1200px;
+      line-height: 1.8;
+    }
+
+    /* ============================================
+       HERO
+       ============================================ */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 72px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 800px;
+      height: 800px;
+      transform: translate(-50%, -50%);
+      background: radial-gradient(circle, var(--accent-dim) 0%, transparent 70%);
+      animation: pulse 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulse {
+      from {
+        opacity: 0.3;
+        transform: translate(-50%, -50%) scale(0.9);
+      }
+
+      to {
+        opacity: 0.6;
+        transform: translate(-50%, -50%) scale(1.1);
+      }
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-tagline {
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-family: var(--font-display);
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      line-height: 1.05;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--accent);
+      position: relative;
+    }
+
+    .hero-desc {
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      max-width: 540px;
+      margin-bottom: 40px;
+      line-height: 1.8;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ============================================
+       BUTTONS
+       ============================================ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 28px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: 4px;
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--bg-deep);
+    }
+
+    .btn-primary:hover {
+      background: #ff9670;
+      box-shadow: 0 0 30px var(--accent-glow);
+      opacity: 1;
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-primary);
+      border-color: var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      opacity: 1;
+    }
+
+    /* ============================================
+       ASSET STORE SECTION
+       ============================================ */
+    .asset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .asset-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+
+    .asset-card:hover {
+      border-color: var(--accent-dim);
+      background: var(--bg-card-hover);
+      transform: translateY(-4px);
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+    }
+
+    .asset-img {
+      width: 100%;
+      height: 220px;
+      background: var(--bg-surface);
+      /* Replace with your asset screenshot */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .asset-body {
+      padding: 24px;
+    }
+
+    .asset-badge {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-primary);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 8px;
+
+    }
+
+    .asset-body h3 {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      margin-bottom: 8px;
+    }
+
+    .asset-body p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-bottom: 16px;
+    }
+
+    .asset-tags {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--text-dim);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 4px 10px;
+      border-radius: 3px;
+      border: 1px solid var(--border);
+    }
+
+    /* ============================================
+       GAME PORTFOLIO
+       ============================================ */
+    .game-showcase {
+      margin-top: 48px;
+    }
+
+    .game-hero-img {
+      width: 100%;
+      height: 400px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      margin-bottom: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Scanline effect on the game image placeholder */
+    .game-hero-img::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: repeating-linear-gradient(0deg,
+          transparent,
+          transparent 2px,
+          rgba(240, 132, 94, 0.015) 2px,
+          rgba(240, 132, 94, 0.015) 4px);
+      pointer-events: none;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 32px;
+      margin-top: 40px;
+    }
+
+    .feature {
+      padding: 28px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      transition: border-color 0.3s;
+    }
+
+    .feature:hover {
+      border-color: var(--accent-dim);
+    }
+
+    .feature-icon {
+      font-size: 1.6rem;
+      margin-bottom: 16px;
+    }
+
+    .feature h4 {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* ============================================
+       DEVLOG / VERTICAL CAROUSEL
+       ============================================ */
+    .devlog-carousel {
+      position: relative;
+      margin-top: 48px;
+    }
+
+    .devlog-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      max-height: 310px;
+      /* Shows ~4 entries, adjust as needed */
+    }
+
+    .devlog-track {
+      transition: transform 0.35s ease;
+    }
+
+    .devlog-entry {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 24px 28px;
+      background: var(--bg-card);
+      transition: background 0.2s;
+      cursor: pointer;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .devlog-entry:last-child {
+      border-bottom: none;
+    }
+
+    .devlog-entry:hover {
+      background: var(--bg-card-hover);
+    }
+
+    .devlog-date {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      min-width: 90px;
+    }
+
+    .devlog-title {
+      font-family: var(--font-display);
+      font-size: 1.05rem;
+      flex: 1;
+    }
+
+    .devlog-tag {
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .devlog-nav {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .devlog-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .devlog-btn:hover {
+      background: var(--accent);
+      color: var(--bg-deep);
+      border-color: var(--accent);
+    }
+
+    .devlog-btn:disabled {
+      opacity: 0.3;
+      cursor: default;
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border-color: var(--border);
+    }
+
+    .devlog-counter {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+    }
+
+    /* ============================================
+       TEAM / ABOUT
+       ============================================ */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .team-card {
+      padding: 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+
+    .team-card:hover {
+      border-color: var(--accent-dim);
+      transform: translateY(-2px);
+    }
+
+    .team-avatar {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: var(--bg-surface);
+      border: 4px solid var(--border);
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      font-size: 0.7rem;
+    }
+
+    .team-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      margin-bottom: 4px;
+    }
+
+    .team-role {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 12px;
+    }
+
+    .team-card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* ============================================
+       CONTACT / SUPPORT
+       ============================================ */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .contact-card {
+      padding: 32px;
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      transition: border-color 0.3s;
+    }
+
+    .contact-card:hover {
+      border-color: var(--accent-dim);
+    }
+
+    .contact-card h4 {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      margin-bottom: 8px;
+    }
+
+    .contact-card p {
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    footer {
+      position: relative;
+      z-index: 1;
+      padding: 40px;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-dim);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-links a {
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* ============================================
+       SCROLL ANIMATIONS
+       ============================================ */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (max-width: 768px) {
+      :root {
+        --section-pad: 80px;
+      }
+
+      section {
+        padding-left: 20px;
+        padding-right: 20px;
+      }
+
+      nav {
+        padding: 0 20px;
+      }
+
+      .nav-links {
+        display: none;
+        /* For mobile: you'd add JS to toggle a mobile menu */
+      }
+
+      .nav-toggle {
+        display: block;
+      }
+
+      .hero h1 {
+        font-size: clamp(2.2rem, 10vw, 3.5rem);
+      }
+
+      .asset-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .team-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .devlog-entry {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .team-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
+    /* ============================================
+       MEDIA CAROUSEL
+       ============================================ */
+    .carousel {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 8px;
+      border: 1px solid var(--border);
+      background: var(--bg-surface);
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.4s ease;
+    }
+
+    .carousel-slide {
+      min-width: 100%;
+      position: relative;
+    }
+
+    .carousel-slide img,
+    .carousel-slide video {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+    }
+
+    .carousel-slide iframe {
+      width: 100%;
+      aspect-ratio: 16/9;
+      border: none;
+      display: block;
+    }
+
+    /* Placeholder slides (remove these when you add real images) */
+    .carousel-placeholder {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      background: var(--bg-card);
+    }
+
+    .carousel--tall .carousel-placeholder {
+      aspect-ratio: 16 / 9;
+      height: auto;
+    }
+
+    /* Arrow buttons */
+    .carousel-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 10;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: rgba(10, 14, 26, 0.8);
+      backdrop-filter: blur(8px);
+      color: var(--text-primary);
+      font-size: 1.2rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+
+    .carousel-btn:hover {
+      background: var(--accent);
+      color: var(--bg-deep);
+      border-color: var(--accent);
+    }
+
+    .carousel-btn--prev {
+      left: 12px;
+    }
+
+    .carousel-btn--next {
+      right: 12px;
+    }
+
+    /* Dot indicators */
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 0;
+      background: var(--bg-card);
+      border-top: 1px solid var(--border);
+    }
+
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      border: none;
+      background: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.2s;
+      padding: 0;
+    }
+
+    .carousel-dot.active {
+      background: var(--accent);
+      transform: scale(1.3);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ========================================
+       NAVIGATION
+       ======================================== -->
+  <nav>
+    <a href="#" class="nav-logo">
+      <img src="images/web-app-manifest-512x512.png" alt="Burntwax Collective"
+        style="height: 32px; margin-right: 10px; vertical-align: middle;">
+      <span>Burntwax Collective</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#assets">Assets</a></li>
+      <li><a href="#game">Game</a></li>
+      <li><a href="#devlog">Devlog</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="nav-toggle" aria-label="Menu"
+      onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+
+  <!-- ========================================
+       HERO SECTION
+       ======================================== -->
+  <section class="hero">
+    <div class="container hero-content">
+      <!-- <p class="hero-tagline">Indie Game Studio & Unity Asset Publisher</p> -->
+      <h1>The future of<br><em>FPS</em><br>games.</h1>
+      <p class="hero-desc">
+        Burntwax Collective: An indie studio crafting a story-driven FPS with wallrunning,
+        EM-powered tools, and evolving alien threats. Also publishing
+        tools on the Unity Asset Store.
+      </p>
+    </div>
+    <div class="hero-actions">
+      <a href="#assets" class="btn btn-primary">View Assets →</a>
+      <a href="#game" class="btn btn-outline">See the Game</a>
+    </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================
+       ASSET STORE SECTION
+       ======================================== -->
+  <section id="assets">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">Unity Asset Store</p>
+        <h2 class="section-title">Our Assets</h2>
+        <p class="section-desc">
+          Production-ready tools and systems built from our own game development pipeline.
+          Battle-tested and documented.
+        </p>
+      </div>
+
+      <div class="asset-grid fade-in">
+        <!-- ASSET CARD 1 — Replace with your real asset -->
+        <div class="asset-card">
+          <!-- MEDIA CAROUSEL — Add/remove slides as needed -->
+          <div class="carousel" data-carousel>
+            <div class="carousel-track">
+              <!-- Slide 0: Video (YouTube embed or local video) -->
+              <div class="carousel-slide">
+                <p>Trailer video coming soon!</p>
+                <!-- <iframe src="https://www.youtube.com/embed/IWDJL8AHXdc" allowfullscreen></iframe> -->
+              </div>
+
+              <!-- Slide 1: Image -->
+              <div class="carousel-slide">
+                <img src="images/main-menu.png" alt="Asset screenshot">
+              </div>
+              <!-- Slide 2: Image -->
+              <div class="carousel-slide">
+                <img src="images/revolvershot.png" alt="Asset screenshot">
+              </div>
+              <!-- Slide 3: Image -->
+              <div class="carousel-slide">
+                <img src="images/smg-aim.png" alt="Asset screenshot">
+              </div>
+              <!-- Slide 4: Image -->
+              <div class="carousel-slide">
+                <img src="images/pause.png" alt="Asset screenshot">
+              </div>
+
+              <div class="carousel-slide">
+                <img src="images/up-high.png" alt="Asset screenshot">
+              </div>
+
+              <div class="carousel-slide">
+                <img src="images/wallrunning.png" alt="Asset screenshot">
+              </div>
+
+              <div class="carousel-slide">
+                <img src="images/crate.png" alt="Asset screenshot">
+              </div>
+
+              <div class="carousel-slide">
+                <img src="images/pistol-stow.png" alt="Asset screenshot">
+              </div>
+              
+              <div class="carousel-slide">
+                <img src="images/smg-stow.png" alt="Asset screenshot">
+              </div>
+
+              <div class="carousel-slide">
+                <img src="images/pistolshot.png" alt="Asset screenshot">
+              </div>
+
+            </div>
+            <button class="carousel-btn carousel-btn--prev" aria-label="Previous">&#8249;</button>
+            <button class="carousel-btn carousel-btn--next" aria-label="Next">&#8250;</button>
+            <div class="carousel-dots"></div>
+          </div>
+          <div class="asset-body">
+            <p class="asset-badge">★ Featured Asset</p>
+            <h3>Burntwax FPS Demo</h3>
+            <p>
+              The Burntwax FPS Demo is a production-ready first-person shooter foundation built in Unity. It provides a
+              modular, extensible set of systems for player movement, camera control, weapons, impact effects, and
+              save/loading — all built on a consistent hierarchical state machine architecture.
+            </p>
+            <div class="asset-tags">
+              <span class="tag">Unity 6+</span>
+              <span class="tag">URP / Built-In</span>
+              <span class="tag">Fully Documented</span>
+            </div>
+            <br>
+            <a href="https://assetstore.unity.com/" class="btn btn-primary btn-sm" target="_blank" rel="noopener">
+              View on Asset Store →
+            </a>
+          </div>
+        </div>
+
+        <!-- ASSET CARD 2 — Duplicate this for more assets -->
+        <!-- <div class="asset-card">
+          <div class="asset-img">
+            820 × 220 — Asset Screenshot
+          </div>
+          <div class="asset-body">
+            <p class="asset-badge">Coming Soon</p>
+            <h3>Another Asset</h3>
+            <p>
+              Description for your next asset. You can duplicate this card
+              as many times as you need.
+            </p>
+            <div class="asset-tags">
+              <span class="tag">Unity 2022+</span>
+              <span class="tag">C# Source</span>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================
+       GAME PORTFOLIO SECTION
+       ======================================== -->
+  <section id="game">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">In Development</p>
+        <h2 class="section-title">Our Game</h2>
+        <p class="section-desc">
+          Back to the basics: A story-driven FPS where you wield electromagnetic technology
+          against evolving alien threats. A game with unique mechanics, yet reminicent of the classics like
+          Half-Life, Bioshock, and Doom.
+        </p>
+      </div>
+
+      <div class="game-showcase fade-in">
+        <!-- GAME MEDIA CAROUSEL -->
+        <div class="carousel carousel--tall" data-carousel>
+          <div class="carousel-track">
+            <!-- Slide 1 -->
+
+            <div class="carousel-slide">
+              <iframe title="Cryocircuit Dragon" frameborder="0" allowfullscreen mozallowfullscreen="true"
+                webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking
+                execution-while-out-of-viewport execution-while-not-rendered web-share
+                src="https://sketchfab.com/models/82bfffafe8c143e2a4fe1e025c264ea0/embed?autostart=1&ui_hint=2&ui_infos=0&ui_controls=1&ui_watermark=0">
+              </iframe>
+            </div>
+
+            <div class="carousel-slide">
+              <iframe title="EM Glove Right" frameborder="0" allowfullscreen mozallowfullscreen="true"
+                webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking"
+                src="https://sketchfab.com/models/934cb5f87f9646a083dc8dad79c3b357/embed?autostart=1&ui_hint=2&ui_infos=0&ui_controls=1&ui_watermark=0">
+              </iframe>
+            </div>
+            <div class="carousel-slide">
+              <img src="images/Map.PNG" alt="Game screenshot">
+            </div>
+            <!-- Slide 2 -->
+            <div class="carousel-slide">
+              <img src="images/Complex_company.PNG" alt="Game screenshot">
+            </div>
+            <!-- Slide 3 -->
+            <div class="carousel-slide">
+              <img src="images/Thumbnail 1.PNG" alt="Game screenshot">
+            </div>
+            <!-- Slide 3: YouTube trailer -->
+            <!-- <div class="carousel-slide">
+              <div class="carousel-placeholder">Slide 3 — trailer or gameplay clip</div>
+              <iframe src="https://www.youtube.com/embed/YOUR_VIDEO_ID" allowfullscreen></iframe>
+            </div> -->
+          </div>
+          <button class="carousel-btn carousel-btn--prev" aria-label="Previous">&#8249;</button>
+          <button class="carousel-btn carousel-btn--next" aria-label="Next">&#8250;</button>
+          <div class="carousel-dots"></div>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature">
+            <div class="feature-icon">⚡</div>
+            <h4>EM-Powered Arsenal</h4>
+            <p>Gloves, boots, and a katana. All unique abilities built by your character with electromagnetic
+              technology.
+            </p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🏃</div>
+            <h4>Wallrunning & Movement</h4>
+            <p>Fluid movement mechanics inspired by the best FPS games. Sprint, wallrun, and leap through environments.
+            </p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🧬</div>
+            <h4>Evolving Enemies</h4>
+            <p>Aliens and other enemies that adapt to your playstyle through machine learning, forcing you to constantly
+              switch tactics.</p>
+          </div>
+          <div class="feature">
+            <div class="feature-icon">🎭</div>
+            <h4>Story-Driven</h4>
+            <p>Visual and hands-on storytelling. We don't believe in custscenes or taking control away from the player,
+              so we tell the story using the game's environment and other cues.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================
+       DEVLOG SECTION
+       ======================================== -->
+  <section id="devlog">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">The Journey</p>
+        <h2 class="section-title">Devlog</h2>
+        <p class="section-desc">
+          Follow our progress as we build. Updates on mechanics, art,
+          and everything in between.
+        </p>
+      </div>
+
+      <div class="devlog-carousel fade-in" data-devlog-carousel>
+        <div class="devlog-list">
+          <div class="devlog-track">
+            <!-- Add as many entries as you want — only a few show at a time -->
+             <div class="devlog-entry" onclick="/* link to post */">
+              <span class="devlog-date">2026.04.12</span>
+              <span class="devlog-title">Asset overhaul with fully original visuals, sounds, vfx, etc.</span>
+              <span class="devlog-tag">Design</span>
+            </div>
+            <div class="devlog-entry" onclick="/* link to post */">
+              <span class="devlog-date">2026.03.28</span>
+              <span class="devlog-title">Cross-scene saving and loading</span>
+              <span class="devlog-tag">Systems</span>
+            </div>
+            <div class="devlog-entry">
+              <span class="devlog-date">2026.03.15</span>
+              <span class="devlog-title">Main Menu and Pause Menu design and implementation</span>
+              <span class="devlog-tag">UI/UX</span>
+            </div>
+            <div class="devlog-entry">
+              <span class="devlog-date">2026.03.01</span>
+              <span class="devlog-title">Wallrunning overhaul, fixing jump direction & slope issues</span>
+              <span class="devlog-tag">Mechanics</span>
+            </div>
+            <div class="devlog-entry">
+              <span class="devlog-date">2026.02.20</span>
+              <span class="devlog-title">Horror chapter design, jumpscare philosophy & no-pause mechanic</span>
+              <span class="devlog-tag">Design</span>
+            </div>
+            <div class="devlog-entry">
+              <span class="devlog-date">2026.02.05</span>
+              <span class="devlog-title">EM Glove prototype, physics-based grab and repel</span>
+              <span class="devlog-tag">Mechanics</span>
+            </div>
+            <div class="devlog-entry">
+              <span class="devlog-date">2026.01.18</span>
+              <span class="devlog-title">Enemy AI research, ML-Agents vs behavior trees</span>
+              <span class="devlog-tag">AI</span>
+            </div>
+            <div class="devlog-entry">
+              <span class="devlog-date">2026.01.03</span>
+              <span class="devlog-title">Hierarchy and organization improvements</span>
+              <span class="devlog-tag">Systems</span>
+            </div>
+          </div>
+        </div>
+        <div class="devlog-nav">
+          <button class="devlog-btn" data-devlog-prev aria-label="Scroll up">&#8593;</button>
+          <span class="devlog-counter"></span>
+          <button class="devlog-btn" data-devlog-next aria-label="Scroll down">&#8595;</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================
+       TEAM / ABOUT SECTION
+       ======================================== -->
+  <section id="team">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">The Team</p>
+        <h2 class="section-title">Who We Are</h2>
+        <p class="section-desc-long">
+          We're two friends who are passionate about making fun and immersive games. After growing up with many classic
+          FPS titles but watching the gaming industry stagnate, we took up the task of creating our own game that lives
+          up to the legacy of those classics. Along the way, we built tools and systems to help us iterate faster and
+          create higher-quality mechanics, which we now publish on the Unity Asset Store. Our goal is to use the revenue
+          from our assets to fund the development of our game, while also sharing our knowledge and tools with the
+          community. We hope to inspire other indie developers to take on ambitious projects and push the boundaries of
+          what's possible in game development.
+        </p>
+      </div>
+
+      <div class="team-grid fade-in">
+        <div class="team-card">
+          <div class="team-avatar" style="background: url('images/kedar.jpg') center/cover no-repeat;"></div>
+          <h4>Kedar</h4>
+          <p class="team-role">Gameplay & Systems</p>
+          <p>Weapons, movement, gun mechanics, damage systems, core gameplay programming, website, general designing</p>
+        </div>
+        <div class="team-card">
+          <div class="team-avatar" style="background: url('images/parth.jpg') center/cover no-repeat;"></div>
+          <h4>Parth</h4>
+          <p class="team-role">Website, Assets & Design</p>
+          <p>Asset Store publishing, core gameplay programing, website, creative direction.</p>
+        </div>
+        <!-- <div class="team-card">
+          <div class="team-avatar">Photo</div>
+          <h4>Amanda</h4>
+          <p class="team-role">Level & Environment</p>
+          <p>Environment design, level architecture, and world-building.</p>
+        </div> -->
+        <!-- <div class="team-card">
+          <div class="team-avatar">Photo</div>
+          <h4>Team Member</h4>
+          <p class="team-role">Role</p>
+          <p>Add more team members or remove this card as needed.</p>
+        </div> -->
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================
+       CONTACT / SUPPORT SECTION
+       ======================================== -->
+  <section id="contact">
+    <div class="container">
+      <div class="fade-in">
+        <p class="section-label">Get in Touch</p>
+        <h2 class="section-title">Contact & Support</h2>
+        <p class="section-desc">
+          Need help with one of our assets? Want to collaborate?
+          Reach out through any of these channels.
+        </p>
+      </div>
+
+      <div class="contact-grid fade-in">
+        <div class="contact-card">
+          <h4>📧 Email</h4>
+          <p>For asset support, business inquiries, or general questions.</p>
+          <a href="mailto:burntwaxcollective@gmail.com" class="btn btn-outline">burntwaxcollective@gmail.com</a>
+        </div>
+
+        <div class="contact-card">
+          <h4>🎬 YouTube</h4>
+          <p>Subscribe to see our devlogs, tutorials, and asset showcases. </p>
+          <a href="https://www.youtube.com/@BurntwaxCollective" class="btn btn-outline" target="_blank"
+            rel="noopener">Subscribe
+            →</a>
+        </div>
+
+        <div class="contact-card">
+          <h4>💬 Instagram</h4>
+          <p>Follow us for behind-the-scenes content and updates.</p>
+          <a href="https://instagram.com/burntwaxcollective/" class="btn btn-outline" target="_blank"
+            rel="noopener">Follow
+            →</a>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ========================================
+       FOOTER
+       ======================================== -->
+  <footer>
+    <div class="footer-inner">
+      <p class="footer-copy">© 2026 Burntwax Collective. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="https://assetstore.unity.com/" target="_blank" rel="noopener">Asset Store</a>
+        <a href="burntwaxcollective@gmail.com" target="_blank" rel="noopener">Email</a>
+        <a href="https://www.youtube.com/@BurntwaxCollective" target="_blank" rel="noopener">YouTube</a>
+        <a href="https://instagram.com/burntwaxcollective/" target="_blank" rel="noopener">Instagram</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ========================================
+       SCROLL ANIMATION SCRIPT
+       ======================================== -->
+  <script>
+    // Simple Intersection Observer for fade-in animations
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+
+    // ========================================
+    // CAROUSEL — works for all [data-carousel] elements
+    // ========================================
+    document.querySelectorAll('[data-carousel]').forEach(carousel => {
+      const track = carousel.querySelector('.carousel-track');
+      const slides = carousel.querySelectorAll('.carousel-slide');
+      const prevBtn = carousel.querySelector('.carousel-btn--prev');
+      const nextBtn = carousel.querySelector('.carousel-btn--next');
+      const dotsContainer = carousel.querySelector('.carousel-dots');
+      let current = 0;
+
+      // Build dot indicators
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.classList.add('carousel-dot');
+        if (i === 0) dot.classList.add('active');
+        dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
+        dot.addEventListener('click', () => goTo(i));
+        dotsContainer.appendChild(dot);
+      });
+
+      function goTo(index) {
+        current = (index + slides.length) % slides.length;
+        track.style.transform = 'translateX(-' + (current * 100) + '%)';
+        // Update dots
+        dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+          d.classList.toggle('active', i === current);
+        });
+      }
+
+      prevBtn.addEventListener('click', () => goTo(current - 1));
+      nextBtn.addEventListener('click', () => goTo(current + 1));
+
+      // Optional: keyboard support
+      carousel.setAttribute('tabindex', '0');
+      carousel.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+      });
+    });
+
+
+    // ========================================
+    // DEVLOG VERTICAL CAROUSEL
+    // ========================================
+    document.querySelectorAll('[data-devlog-carousel]').forEach(carousel => {
+      const list = carousel.querySelector('.devlog-list');
+      const track = carousel.querySelector('.devlog-track');
+      const entries = carousel.querySelectorAll('.devlog-entry');
+      const prevBtn = carousel.querySelector('[data-devlog-prev]');
+      const nextBtn = carousel.querySelector('[data-devlog-next]');
+      const counter = carousel.querySelector('.devlog-counter');
+
+      const visibleCount = 4; // How many entries visible at once
+      let offset = 0;
+      const maxOffset = Math.max(0, entries.length - visibleCount);
+
+      function update() {
+        // Get height of one entry
+        const entryHeight = entries[0].offsetHeight;
+        track.style.transform = 'translateY(-' + (offset * entryHeight) + 'px)';
+        prevBtn.disabled = offset === 0;
+        nextBtn.disabled = offset >= maxOffset;
+        counter.textContent = (offset + 1) + '–' + Math.min(offset + visibleCount, entries.length) + ' / ' + entries.length;
+      }
+
+      prevBtn.addEventListener('click', () => { if (offset > 0) { offset--; update(); } });
+      nextBtn.addEventListener('click', () => { if (offset < maxOffset) { offset++; update(); } });
+
+      update();
+    });
+  </script>
+
+</body>
+
+</html>
