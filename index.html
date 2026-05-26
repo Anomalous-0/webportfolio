@@ -1,31 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Kedar Haldar — Photography</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap"
+    rel="stylesheet" />
 
   <style>
     :root {
-      --bg:        #f5f0e8;
-      --bg2:       #ede7da;
-      --surface:   #e8e0d0;
-      --border:    rgba(90,30,40,0.12);
-      --text:      #2a1018;
-      --muted:     #8a7060;
-      --accent:    #6e1423;
-      --accent2:   #a03040;
+      --bg: #f5f0e8;
+      --bg2: #ede7da;
+      --surface: #e8e0d0;
+      --border: rgba(90, 30, 40, 0.12);
+      --text: #2a1018;
+      --muted: #8a7060;
+      --accent: #6e1423;
+      --accent2: #a03040;
       --font-head: 'Cormorant Garamond', serif;
       --font-body: 'Raleway', sans-serif;
-      --nav-h:     64px;
-      --max:       1280px;
+      --nav-h: 64px;
+      --max: 1280px;
     }
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background: var(--bg);
       color: var(--text);
@@ -34,29 +47,59 @@
       line-height: 1.7;
       overflow-x: hidden;
     }
-    img { display: block; width: 100%; height: 100%; object-fit: contain; }
-    .photo-thumb img, .lightbox-img img { object-fit: contain; background: var(--surface); }
-    a  { color: inherit; text-decoration: none; }
+
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .photo-thumb img,
+    .lightbox-img img {
+      object-fit: contain;
+      background: var(--surface);
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
     /* NAV */
     nav {
-      position: fixed; top: 0; left: 0; right: 0;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
       height: var(--nav-h);
-      display: flex; align-items: center; justify-content: space-between;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       padding: 0 48px;
-      background: rgba(245,240,232,0.92);
+      background: rgba(245, 240, 232, 0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       z-index: 100;
     }
+
     .nav-logo {
       font-family: var(--font-head);
       font-size: 1.35rem;
       letter-spacing: 0.06em;
       color: var(--text);
     }
-    .nav-logo span { color: var(--accent); }
-    .nav-links { display: flex; gap: 36px; list-style: none; }
+
+    .nav-logo span {
+      color: var(--accent);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
     .nav-links a {
       font-size: 0.7rem;
       letter-spacing: 0.18em;
@@ -64,14 +107,27 @@
       color: var(--muted);
       transition: color 0.25s;
     }
-    .nav-links a:hover { color: var(--accent); }
-    .hamburger {
-      display: none; flex-direction: column; gap: 5px;
-      background: none; border: none; cursor: pointer; padding: 4px;
+
+    .nav-links a:hover {
+      color: var(--accent);
     }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px;
+    }
+
     .hamburger span {
-      display: block; width: 24px; height: 1.5px;
-      background: var(--text); transition: all 0.3s;
+      display: block;
+      width: 24px;
+      height: 1.5px;
+      background: var(--text);
+      transition: all 0.3s;
     }
 
     /* HERO */
@@ -81,6 +137,7 @@
       margin: 0 auto;
       border-bottom: 1px solid var(--border);
     }
+
     .hero-eyebrow {
       font-size: 0.6rem;
       letter-spacing: 0.3em;
@@ -88,6 +145,7 @@
       color: var(--accent);
       margin-bottom: 14px;
     }
+
     .hero-title {
       font-family: var(--font-head);
       font-size: clamp(3rem, 7vw, 6.5rem);
@@ -97,7 +155,12 @@
       margin-bottom: 18px;
       color: var(--text);
     }
-    .hero-title em { font-style: italic; color: var(--accent); }
+
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
+    }
+
     .hero-sub {
       font-size: 0.85rem;
       color: var(--muted);
@@ -106,7 +169,12 @@
     }
 
     /* SECTIONS */
-    section { padding: 120px 64px; max-width: var(--max); margin: 0 auto; }
+    section {
+      padding: 120px 64px;
+      max-width: var(--max);
+      margin: 0 auto;
+    }
+
     .section-label {
       font-size: 0.6rem;
       letter-spacing: 0.3em;
@@ -114,6 +182,7 @@
       color: var(--accent);
       margin-bottom: 12px;
     }
+
     .section-title {
       font-family: var(--font-head);
       font-size: clamp(2rem, 4vw, 3.2rem);
@@ -121,24 +190,42 @@
       line-height: 1.15;
       margin-bottom: 48px;
     }
-    .divider { width: 48px; height: 1px; background: var(--accent); margin: 20px 0 40px; }
+
+    .divider {
+      width: 48px;
+      height: 1px;
+      background: var(--accent);
+      margin: 20px 0 40px;
+    }
 
     /* ABOUT */
-    #about { scroll-margin-top: var(--nav-h); }
+    #about {
+      scroll-margin-top: var(--nav-h);
+    }
+
     .about-grid {
       display: grid;
       grid-template-columns: 1fr 1.6fr;
       gap: 80px;
       align-items: start;
     }
+
     .about-photo-frame {
       aspect-ratio: 3/4;
       background: var(--surface);
       overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-      color: var(--muted); font-size: 0.75rem; letter-spacing: 0.1em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--muted);
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
     }
-    .about-photo-frame img { object-fit: cover; }
+
+    .about-photo-frame img {
+      object-fit: cover;
+    }
+
     /* FIX: use actual text color, not near-white from dark theme */
     .about-text p {
       color: var(--text);
@@ -146,6 +233,7 @@
       margin-bottom: 20px;
       font-size: 0.95rem;
     }
+
     .copyright-block {
       margin-top: 40px;
       padding: 20px 24px;
@@ -157,8 +245,17 @@
     }
 
     /* GALLERY */
-    #gallery { scroll-margin-top: var(--nav-h); }
-    .gallery-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; }
+    #gallery {
+      scroll-margin-top: var(--nav-h);
+    }
+
+    .gallery-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 48px;
+    }
+
     .tab-btn {
       padding: 8px 20px;
       background: transparent;
@@ -171,12 +268,18 @@
       cursor: pointer;
       transition: all 0.25s;
     }
-    .tab-btn:hover, .tab-btn.active {
+
+    .tab-btn:hover,
+    .tab-btn.active {
       background: var(--accent);
       border-color: var(--accent);
       color: #f5f0e8;
     }
-    .gallery-category { margin-bottom: 80px; }
+
+    .gallery-category {
+      margin-bottom: 80px;
+    }
+
     .category-heading {
       font-family: var(--font-head);
       font-size: 1.4rem;
@@ -185,6 +288,7 @@
       margin-bottom: 6px;
       letter-spacing: 0.06em;
     }
+
     .category-sub {
       font-size: 0.7rem;
       letter-spacing: 0.15em;
@@ -192,37 +296,72 @@
       color: var(--muted);
       margin-bottom: 28px;
     }
+
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 24px;
     }
+
     .photo-card {
       background: var(--surface);
       overflow: hidden;
       cursor: pointer;
       transition: transform 0.35s ease;
     }
-    .photo-card:hover { transform: translateY(-4px); }
-    .photo-card:hover .photo-thumb img { transform: scale(1.04); }
+
+    .photo-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .photo-card:hover .photo-thumb img {
+      transform: scale(1.04);
+    }
+
     .photo-thumb {
       aspect-ratio: auto;
       overflow: hidden;
       background: var(--surface);
       position: relative;
     }
-    .photo-card.wide  .photo-thumb { aspect-ratio: auto; }
-    .photo-card.tall  .photo-thumb { aspect-ratio: auto; }
-    .photo-card.square .photo-thumb { aspect-ratio: auto; }
-    .photo-thumb img { transition: transform 0.55s ease; }
-    .photo-thumb .img-placeholder {
-      position: absolute; inset: 0;
-      display: flex; align-items: center; justify-content: center;
-      flex-direction: column; gap: 8px;
-      color: var(--muted); font-size: 0.7rem; letter-spacing: 0.1em;
+
+    .photo-card.wide .photo-thumb {
+      aspect-ratio: auto;
     }
-    .img-placeholder svg { opacity: 0.3; }
-    .photo-info { padding: 16px 18px 20px; }
+
+    .photo-card.tall .photo-thumb {
+      aspect-ratio: auto;
+    }
+
+    .photo-card.square .photo-thumb {
+      aspect-ratio: auto;
+    }
+
+    .photo-thumb img {
+      transition: transform 0.55s ease;
+    }
+
+    .photo-thumb .img-placeholder {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+    }
+
+    .img-placeholder svg {
+      opacity: 0.3;
+    }
+
+    .photo-info {
+      padding: 16px 18px 20px;
+    }
+
     .photo-title {
       font-family: var(--font-head);
       font-size: 1.05rem;
@@ -230,18 +369,20 @@
       margin-bottom: 6px;
       color: var(--text);
     }
+
     /* FIX: caption color visible on beige */
     .photo-caption {
       font-size: 0.78rem;
       color: var(--muted);
       line-height: 1.65;
     }
+
     .photo-tag {
       display: inline-block;
       margin-top: 10px;
       padding: 3px 9px;
-      background: rgba(110,20,35,0.08);
-      border: 1px solid rgba(110,20,35,0.2);
+      background: rgba(110, 20, 35, 0.08);
+      border: 1px solid rgba(110, 20, 35, 0.2);
       color: var(--accent);
       font-size: 0.6rem;
       letter-spacing: 0.12em;
@@ -251,40 +392,85 @@
     /* LIGHTBOX */
     .lightbox {
       display: none;
-      position: fixed; inset: 0; z-index: 200;
-      background: rgba(42,16,24,0.93);
-      align-items: center; justify-content: center;
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(42, 16, 24, 0.93);
+      align-items: center;
+      justify-content: center;
       padding: 32px;
     }
-    .lightbox.open { display: flex; }
+
+    .lightbox.open {
+      display: flex;
+    }
+
     .lightbox-inner {
       position: relative;
-      max-width: 920px; width: 100%;
-      display: grid; grid-template-columns: 1fr 280px;
+      max-width: 920px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 280px;
       background: var(--bg2);
       overflow: hidden;
     }
-    .lightbox-img { aspect-ratio: auto; background: var(--surface); }
-    .lightbox-img img { height: 100%; }
+
+    .lightbox-img {
+      aspect-ratio: auto;
+      background: var(--surface);
+    }
+
+    .lightbox-img img {
+      height: 100%;
+    }
+
     .lightbox-details {
       padding: 32px 28px;
-      display: flex; flex-direction: column; gap: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
       overflow-y: auto;
     }
-    .lightbox-title { font-family: var(--font-head); font-size: 1.5rem; font-weight: 400; color: var(--text); }
-    .lightbox-caption { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
+
+    .lightbox-title {
+      font-family: var(--font-head);
+      font-size: 1.5rem;
+      font-weight: 400;
+      color: var(--text);
+    }
+
+    .lightbox-caption {
+      font-size: 0.82rem;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
     .lb-close {
-      position: absolute; top: 16px; right: 16px;
-      background: none; border: none;
-      color: var(--text); font-size: 1.4rem;
-      cursor: pointer; line-height: 1;
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      background: none;
+      border: none;
+      color: var(--text);
+      font-size: 1.4rem;
+      cursor: pointer;
+      line-height: 1;
       transition: color 0.2s;
     }
-    .lb-close:hover { color: var(--accent); }
+
+    .lb-close:hover {
+      color: var(--accent);
+    }
 
     /* REFLECTION */
-    #reflection { scroll-margin-top: var(--nav-h); }
-    .reflection-body { max-width: 720px; }
+    #reflection {
+      scroll-margin-top: var(--nav-h);
+    }
+
+    .reflection-body {
+      max-width: 720px;
+    }
+
     /* FIX: reflection text visible on beige */
     .reflection-body p {
       font-size: 0.95rem;
@@ -292,6 +478,7 @@
       opacity: 0.8;
       margin-bottom: 20px;
     }
+
     .reflection-body .prompt {
       font-style: italic;
       color: var(--muted);
@@ -306,40 +493,110 @@
     footer {
       padding: 60px 64px;
       border-top: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: space-between;
-      flex-wrap: wrap; gap: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
     }
-    .footer-name { font-family: var(--font-head); font-size: 1.1rem; color: var(--text); }
-    .footer-copy { font-size: 0.7rem; letter-spacing: 0.08em; color: var(--muted); }
-    .footer-links { display: flex; gap: 24px; list-style: none; }
+
+    .footer-name {
+      font-family: var(--font-head);
+      font-size: 1.1rem;
+      color: var(--text);
+    }
+
+    .footer-copy {
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+
     .footer-links a {
-      font-size: 0.65rem; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--muted); transition: color 0.2s;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      transition: color 0.2s;
     }
-    .footer-links a:hover { color: var(--accent); }
+
+    .footer-links a:hover {
+      color: var(--accent);
+    }
 
     /* MOBILE */
     @media (max-width: 768px) {
-      nav { padding: 0 24px; }
+      nav {
+        padding: 0 24px;
+      }
+
       .nav-links {
-        display: none; flex-direction: column; gap: 0;
-        position: absolute; top: var(--nav-h); left: 0; right: 0;
-        background: var(--bg2); border-bottom: 1px solid var(--border);
+        display: none;
+        flex-direction: column;
+        gap: 0;
+        position: absolute;
+        top: var(--nav-h);
+        left: 0;
+        right: 0;
+        background: var(--bg2);
+        border-bottom: 1px solid var(--border);
         padding: 16px 0;
       }
-      .nav-links.open { display: flex; }
-      .nav-links li a { display: block; padding: 12px 24px; }
-      .hamburger { display: flex; }
-      #hero { padding: calc(var(--nav-h) + 40px) 24px 48px; }
-      section { padding: 80px 24px; }
-      .about-grid { grid-template-columns: 1fr; gap: 40px; }
-      .photo-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
-      .lightbox-inner { grid-template-columns: 1fr; }
-      .lightbox-img { aspect-ratio: 16/9; }
-      footer { flex-direction: column; align-items: flex-start; padding: 40px 24px; }
+
+      .nav-links.open {
+        display: flex;
+      }
+
+      .nav-links li a {
+        display: block;
+        padding: 12px 24px;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+
+      #hero {
+        padding: calc(var(--nav-h) + 40px) 24px 48px;
+      }
+
+      section {
+        padding: 80px 24px;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .photo-grid {
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 16px;
+      }
+
+      .lightbox-inner {
+        grid-template-columns: 1fr;
+      }
+
+      .lightbox-img {
+        aspect-ratio: 16/9;
+      }
+
+      footer {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 40px 24px;
+      }
     }
   </style>
 </head>
+
 <body>
 
   <!-- NAV -->
@@ -372,14 +629,11 @@
       </div>
       <div class="about-text">
         <p>
-          Kedar Haldar is a student at Homestead High School and a passionate photographer with a focus on capturing the beauty in everyday moments.
-        </p>
-        <p>
-          Write about how you got into photography, what drew you to it, and what you have learned this year.
-        </p>
-        <p>
-          Describe your photographic eye — the subjects, moods, and techniques that excite you. What do you hope viewers feel when they look at your work?
-        </p>
+          My name is Kedar Haldar, and I am a senior at Homestead High School, in Intro To Photography.
+          My favorite types of photography include macro shots as well as landscape photography. Throughout this
+          course, I learned how to apply many different photography techniques and learned how to connect them to the
+          principles of art and design.
+
         <div class="copyright-block">
           Copyright © Kedar Haldar<br>
           All rights reserved<br>
@@ -414,53 +668,81 @@
       <p class="category-sub">Line · Shape · Form · Value · Color · Texture · Space</p>
       <div class="photo-grid">
 
-        <div class="photo-card" data-title="Line" data-caption="Caption about how line is used in this composition." data-tag="Elements of Art" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Line" data-caption="Caption about how line is used in this composition."
+          data-tag="Elements of Art" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/Line.png" alt="Line" />
           </div>
-          <div class="photo-info"><p class="photo-title">Line</p><p class="photo-caption">Caption about line.</p><span class="photo-tag">Elements of Art</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Line</p>
+            <p class="photo-caption">Caption about line.</p><span class="photo-tag">Elements of Art</span>
+          </div>
         </div>
 
-        <div class="photo-card" data-title="Shape" data-caption="Caption about shape in this composition." data-tag="Elements of Art" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Shape" data-caption="Caption about shape in this composition."
+          data-tag="Elements of Art" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/Shape.png" alt="Shape" />
           </div>
-          <div class="photo-info"><p class="photo-title">Shape</p><p class="photo-caption">Caption about shape.</p><span class="photo-tag">Elements of Art</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Shape</p>
+            <p class="photo-caption">Caption about shape.</p><span class="photo-tag">Elements of Art</span>
+          </div>
         </div>
 
-        <div class="photo-card" data-title="Form" data-caption="Caption about form and three-dimensionality." data-tag="Elements of Art" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Form" data-caption="Caption about form and three-dimensionality."
+          data-tag="Elements of Art" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/Form.png" alt="Form" />
           </div>
-          <div class="photo-info"><p class="photo-title">Form</p><p class="photo-caption">Caption about form.</p><span class="photo-tag">Elements of Art</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Form</p>
+            <p class="photo-caption">Caption about form.</p><span class="photo-tag">Elements of Art</span>
+          </div>
         </div>
 
-        <div class="photo-card" data-title="Value" data-caption="Caption about light, shadow, and tonal range." data-tag="Elements of Art" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Value" data-caption="Caption about light, shadow, and tonal range."
+          data-tag="Elements of Art" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/Value.png" alt="Value" />
           </div>
-          <div class="photo-info"><p class="photo-title">Value</p><p class="photo-caption">Caption about value.</p><span class="photo-tag">Elements of Art</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Value</p>
+            <p class="photo-caption">Caption about value.</p><span class="photo-tag">Elements of Art</span>
+          </div>
         </div>
 
-        <div class="photo-card" data-title="Color" data-caption="Caption about color palette, mood, and scheme." data-tag="Elements of Art" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Color" data-caption="Caption about color palette, mood, and scheme."
+          data-tag="Elements of Art" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/2HaldarK_Color.jpeg" alt="Color" />
           </div>
-          <div class="photo-info"><p class="photo-title">Color</p><p class="photo-caption">Caption about color.</p><span class="photo-tag">Elements of Art</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Color</p>
+            <p class="photo-caption">Caption about color.</p><span class="photo-tag">Elements of Art</span>
+          </div>
         </div>
 
-        <div class="photo-card" data-title="Texture" data-caption="Caption about surface texture and detail." data-tag="Elements of Art" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Texture" data-caption="Caption about surface texture and detail."
+          data-tag="Elements of Art" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/2HaldarK_Texture (1).jpeg" alt="Texture" />
           </div>
-          <div class="photo-info"><p class="photo-title">Texture</p><p class="photo-caption">Caption about texture.</p><span class="photo-tag">Elements of Art</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Texture</p>
+            <p class="photo-caption">Caption about texture.</p><span class="photo-tag">Elements of Art</span>
+          </div>
         </div>
 
-        <div class="photo-card" data-title="Space" data-caption="Caption about negative space and depth." data-tag="Elements of Art" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Space" data-caption="Caption about negative space and depth."
+          data-tag="Elements of Art" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/Space.png" alt="Space" />
           </div>
-          <div class="photo-info"><p class="photo-title">Space</p><p class="photo-caption">Caption about space.</p><span class="photo-tag">Elements of Art</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Space</p>
+            <p class="photo-caption">Caption about space.</p><span class="photo-tag">Elements of Art</span>
+          </div>
         </div>
 
       </div>
@@ -472,18 +754,28 @@
       <p class="category-sub">Balance · Contrast · Emphasis · Movement · Pattern · Rhythm · Unity</p>
       <div class="photo-grid">
 
-        <div class="photo-card" data-title="Balance" data-caption="Describe how you achieved balance in this composition — symmetrical vs asymmetrical, visual weight, etc." data-tag="Principles of Design" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Balance"
+          data-caption="Describe how you achieved balance in this composition — symmetrical vs asymmetrical, visual weight, etc."
+          data-tag="Principles of Design" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/2HaldarK_Asymmetrical.jpeg" alt="Balance" />
           </div>
-          <div class="photo-info"><p class="photo-title">Balance</p><p class="photo-caption">Caption about balance.</p><span class="photo-tag">Principles of Design</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Balance</p>
+            <p class="photo-caption">Caption about balance.</p><span class="photo-tag">Principles of Design</span>
+          </div>
         </div>
 
-        <div class="photo-card" data-title="Contrast" data-caption="Explain the contrast at work — light vs dark, color, texture, or subject matter." data-tag="Principles of Design" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Contrast"
+          data-caption="Explain the contrast at work — light vs dark, color, texture, or subject matter."
+          data-tag="Principles of Design" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/contrast.jpg" alt="Contrast" />
           </div>
-          <div class="photo-info"><p class="photo-title">Contrast</p><p class="photo-caption">Caption about contrast.</p><span class="photo-tag">Principles of Design</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Contrast</p>
+            <p class="photo-caption">Caption about contrast.</p><span class="photo-tag">Principles of Design</span>
+          </div>
         </div>
 
       </div>
@@ -495,11 +787,16 @@
       <p class="category-sub">Letters found in the world around us</p>
       <div class="photo-grid">
 
-        <div class="photo-card" data-title="A to Z" data-caption="Describe the letter found and where/how you spotted it." data-tag="A to Z" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="A to Z"
+          data-caption="Describe the letter found and where/how you spotted it." data-tag="A to Z"
+          onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/2HaldarK_Name.jpeg" alt="Letter" />
           </div>
-          <div class="photo-info"><p class="photo-title">Letter</p><p class="photo-caption">Caption about this letter.</p><span class="photo-tag">A to Z</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Letter</p>
+            <p class="photo-caption">Caption about this letter.</p><span class="photo-tag">A to Z</span>
+          </div>
         </div>
 
       </div>
@@ -511,32 +808,52 @@
       <p class="category-sub">A unified visual story</p>
       <div class="photo-grid">
 
-        <div class="photo-card" data-title="Theme Photo 1" data-caption="Describe the theme and how this photo fits into the series." data-tag="Theme" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Theme Photo 1"
+          data-caption="Describe the theme and how this photo fits into the series." data-tag="Theme"
+          onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/2HaldarK_FebBreak.jpeg" alt="Theme Photo 1" />
           </div>
-          <div class="photo-info"><p class="photo-title">Theme Photo 1</p><p class="photo-caption">Caption for theme photo 1.</p><span class="photo-tag">Theme</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Theme Photo 1</p>
+            <p class="photo-caption">Caption for theme photo 1.</p><span class="photo-tag">Theme</span>
+          </div>
         </div>
 
-        <div class="photo-card" data-title="Theme Photo 2" data-caption="Describe the theme and how this photo fits into the series." data-tag="Theme" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Theme Photo 2"
+          data-caption="Describe the theme and how this photo fits into the series." data-tag="Theme"
+          onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/2HaldarK_Reflection.jpeg" alt="Theme Photo 2" />
           </div>
-          <div class="photo-info"><p class="photo-title">Theme Photo 2</p><p class="photo-caption">Caption for theme photo 2.</p><span class="photo-tag">Theme</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Theme Photo 2</p>
+            <p class="photo-caption">Caption for theme photo 2.</p><span class="photo-tag">Theme</span>
+          </div>
         </div>
 
-        <div class="photo-card" data-title="Theme Photo 3" data-caption="Describe the theme and how this photo fits into the series." data-tag="Theme" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Theme Photo 3"
+          data-caption="Describe the theme and how this photo fits into the series." data-tag="Theme"
+          onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/2HaldarK_Self.jpeg" alt="Theme Photo 3" />
           </div>
-          <div class="photo-info"><p class="photo-title">Theme Photo 3</p><p class="photo-caption">Caption for theme photo 3.</p><span class="photo-tag">Theme</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Theme Photo 3</p>
+            <p class="photo-caption">Caption for theme photo 3.</p><span class="photo-tag">Theme</span>
+          </div>
         </div>
 
-        <div class="photo-card" data-title="Theme Photo 4" data-caption="Describe the theme and how this photo fits into the series." data-tag="Theme" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Theme Photo 4"
+          data-caption="Describe the theme and how this photo fits into the series." data-tag="Theme"
+          onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/2HaldarK_Capsule.jpeg" alt="Theme Photo 4" />
           </div>
-          <div class="photo-info"><p class="photo-title">Theme Photo 4</p><p class="photo-caption">Caption for theme photo 4.</p><span class="photo-tag">Theme</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Theme Photo 4</p>
+            <p class="photo-caption">Caption for theme photo 4.</p><span class="photo-tag">Theme</span>
+          </div>
         </div>
 
       </div>
@@ -548,18 +865,29 @@
       <p class="category-sub">Close-up details and unusual viewpoints</p>
       <div class="photo-grid">
 
-        <div class="photo-card" data-title="Macro Shot" data-caption="Describe the subject, how close you got, and what details emerge at this scale." data-tag="Macro &amp; Perspective" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Macro Shot"
+          data-caption="Describe the subject, how close you got, and what details emerge at this scale."
+          data-tag="Macro &amp; Perspective" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/2HaldarK_Macro (1).jpeg" alt="Macro Shot" />
           </div>
-          <div class="photo-info"><p class="photo-title">Macro Shot</p><p class="photo-caption">Caption for macro photo.</p><span class="photo-tag">Macro &amp; Perspective</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Macro Shot</p>
+            <p class="photo-caption">Caption for macro photo.</p><span class="photo-tag">Macro &amp; Perspective</span>
+          </div>
         </div>
 
-        <div class="photo-card" data-title="Perspective" data-caption="Explain the unusual angle or viewpoint chosen and how it changes the way the subject is perceived." data-tag="Macro &amp; Perspective" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Perspective"
+          data-caption="Explain the unusual angle or viewpoint chosen and how it changes the way the subject is perceived."
+          data-tag="Macro &amp; Perspective" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/2HaldarK_Perspective.jpeg" alt="Perspective" />
           </div>
-          <div class="photo-info"><p class="photo-title">Perspective</p><p class="photo-caption">Caption for perspective photo.</p><span class="photo-tag">Macro &amp; Perspective</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Perspective</p>
+            <p class="photo-caption">Caption for perspective photo.</p><span class="photo-tag">Macro &amp;
+              Perspective</span>
+          </div>
         </div>
 
       </div>
@@ -571,11 +899,16 @@
       <p class="category-sub">Time made visible — light trails, motion blur, silky water</p>
       <div class="photo-grid">
 
-        <div class="photo-card wide" data-title="Long Exposure" data-caption="Describe the shutter speed used, what was moving, and the effect it created." data-tag="Long Exposure" onclick="openLightbox(this)">
+        <div class="photo-card wide" data-title="Long Exposure"
+          data-caption="Describe the shutter speed used, what was moving, and the effect it created."
+          data-tag="Long Exposure" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/2HaldarK_LongX.jpeg" alt="Long Exposure" />
           </div>
-          <div class="photo-info"><p class="photo-title">Long Exposure</p><p class="photo-caption">Caption for long exposure photo.</p><span class="photo-tag">Long Exposure</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Long Exposure</p>
+            <p class="photo-caption">Caption for long exposure photo.</p><span class="photo-tag">Long Exposure</span>
+          </div>
         </div>
 
       </div>
@@ -587,18 +920,28 @@
       <p class="category-sub">Kaleidoscope · Partial Desaturation</p>
       <div class="photo-grid">
 
-        <div class="photo-card wide" data-title="Kaleidoscope" data-caption="Describe the original photo, the technique used, and the effect you were trying to achieve." data-tag="Photo Editing" onclick="openLightbox(this)">
+        <div class="photo-card wide" data-title="Kaleidoscope"
+          data-caption="Describe the original photo, the technique used, and the effect you were trying to achieve."
+          data-tag="Photo Editing" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/Kaleidoscope.png" alt="Kaleidoscope" />
           </div>
-          <div class="photo-info"><p class="photo-title">Kaleidoscope</p><p class="photo-caption">Caption for kaleidoscope edit.</p><span class="photo-tag">Photo Editing</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Kaleidoscope</p>
+            <p class="photo-caption">Caption for kaleidoscope edit.</p><span class="photo-tag">Photo Editing</span>
+          </div>
         </div>
 
-        <div class="photo-card" data-title="Partial Desaturation" data-caption="Explain your color selection, the mood it creates, and the story behind the photo." data-tag="Photo Editing" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Partial Desaturation"
+          data-caption="Explain your color selection, the mood it creates, and the story behind the photo."
+          data-tag="Photo Editing" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/2HaldarK_Desaturate.jpg" alt="Partial Desaturation" />
           </div>
-          <div class="photo-info"><p class="photo-title">Partial Desaturation</p><p class="photo-caption">Caption for desaturation edit.</p><span class="photo-tag">Photo Editing</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Partial Desaturation</p>
+            <p class="photo-caption">Caption for desaturation edit.</p><span class="photo-tag">Photo Editing</span>
+          </div>
         </div>
 
       </div>
@@ -610,11 +953,16 @@
       <p class="category-sub">Puzzle &amp; multi-part works</p>
       <div class="photo-grid">
 
-        <div class="photo-card" data-title="Puzzle Project" data-caption="Describe how the puzzle was constructed, the original image, and what made it interesting to work with." data-tag="Projects" onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Puzzle Project"
+          data-caption="Describe how the puzzle was constructed, the original image, and what made it interesting to work with."
+          data-tag="Projects" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <img src="images/2HaldarK_Puzzle.jpeg" alt="Puzzle Project" />
           </div>
-          <div class="photo-info"><p class="photo-title">Puzzle Project</p><p class="photo-caption">Caption for the puzzle project.</p><span class="photo-tag">Projects</span></div>
+          <div class="photo-info">
+            <p class="photo-title">Puzzle Project</p>
+            <p class="photo-caption">Caption for the puzzle project.</p><span class="photo-tag">Projects</span>
+          </div>
         </div>
 
       </div>
@@ -629,15 +977,21 @@
       <h2 class="section-title">Final Reflection</h2>
       <div class="divider"></div>
       <div class="reflection-body">
-        <p class="prompt">
-          Prompt ideas: What did you learn this year? How have your skills grown? What was your
-          favorite assignment and why? What would you do differently? What do you want to explore
-          next in photography?
+
+        <p>The most important thing this class taught me is how to intentionally set up a shot. Before, I would just
+          point and shoot without really thinking about the settings or composition. I would take a bunch of photos and
+          hope that one of them turned out okay. But now, I understand how to use the camera to achieve the look I want.
+
+          Learning settings such as ISO, aperture, shutter speed, and the rules of art and design really changed how I
+          approach photography.
+
+          Photoshop was another great skill taught in this class. It showed me how to edit the raw shots I've taken and
+          adjust them so the final image actually matched my vision. Overall, this class has given me a much deeper
+          appreciation for photography and the art of creating images. I'm excited to continue exploring and improving
+          my skills in the future.
+
         </p>
-        <p>This year in photography I learned…</p>
-        <p>The assignment that challenged me most was…</p>
-        <p>Looking back, I would change…</p>
-        <p>Going forward, I hope to…</p>
+
       </div>
     </div>
   </section>
@@ -660,7 +1014,9 @@
     <div class="lightbox-inner">
       <button class="lb-close" onclick="closeLightbox()">✕</button>
       <div class="lightbox-img" id="lbImg">
-        <div class="img-placeholder" style="height:100%;display:flex;align-items:center;justify-content:center;color:#8a7060;font-size:.75rem;">No image</div>
+        <div class="img-placeholder"
+          style="height:100%;display:flex;align-items:center;justify-content:center;color:#8a7060;font-size:.75rem;">No
+          image</div>
       </div>
       <div class="lightbox-details">
         <span class="photo-tag" id="lbTag"></span>
@@ -674,7 +1030,7 @@
     document.getElementById('yr').textContent = new Date().getFullYear();
 
     const hamburger = document.getElementById('hamburger');
-    const navLinks  = document.getElementById('navLinks');
+    const navLinks = document.getElementById('navLinks');
     hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
     navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
@@ -690,7 +1046,7 @@
     });
 
     function openLightbox(card) {
-      const lb     = document.getElementById('lightbox');
+      const lb = document.getElementById('lightbox');
       const imgDiv = document.getElementById('lbImg');
       const srcImg = card.querySelector('img');
       imgDiv.innerHTML = '';
@@ -701,9 +1057,9 @@
       } else {
         imgDiv.innerHTML = '<div style="height:100%;display:flex;align-items:center;justify-content:center;color:#8a7060;font-size:.75rem;">No image</div>';
       }
-      document.getElementById('lbTitle').textContent   = card.dataset.title   || '';
+      document.getElementById('lbTitle').textContent = card.dataset.title || '';
       document.getElementById('lbCaption').textContent = card.dataset.caption || '';
-      document.getElementById('lbTag').textContent     = card.dataset.tag     || '';
+      document.getElementById('lbTag').textContent = card.dataset.tag || '';
       lb.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
@@ -718,4 +1074,5 @@
   </script>
 
 </body>
+
 </html>
