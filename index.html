@@ -3,13 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Your Name — Photography</title>
+  <title>Kedar Haldar — Photography</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
 
   <style>
-    /* ─── VARIABLES ─────────────────────────────────────── */
     :root {
       --bg:        #f5f0e8;
       --bg2:       #ede7da;
@@ -17,15 +16,14 @@
       --border:    rgba(90,30,40,0.12);
       --text:      #2a1018;
       --muted:     #8a7060;
-      --accent:    #6e1423;       /* deep maroon */
-      --accent2:   #a03040;       /* lighter maroon */
+      --accent:    #6e1423;
+      --accent2:   #a03040;
       --font-head: 'Cormorant Garamond', serif;
       --font-body: 'Raleway', sans-serif;
       --nav-h:     64px;
       --max:       1280px;
     }
 
-    /* ─── RESET ─────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; }
     body {
@@ -39,7 +37,7 @@
     img { display: block; width: 100%; height: 100%; object-fit: cover; }
     a  { color: inherit; text-decoration: none; }
 
-    /* ─── NAVIGATION ────────────────────────────────────── */
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0;
       height: var(--nav-h);
@@ -66,7 +64,6 @@
       transition: color 0.25s;
     }
     .nav-links a:hover { color: var(--accent); }
-    /* hamburger — visible on mobile */
     .hamburger {
       display: none; flex-direction: column; gap: 5px;
       background: none; border: none; cursor: pointer; padding: 4px;
@@ -76,7 +73,7 @@
       background: var(--text); transition: all 0.3s;
     }
 
-    /* ─── NAME HEADER ───────────────────────────────────── */
+    /* HERO */
     #hero {
       padding: calc(var(--nav-h) + 72px) 64px 72px;
       max-width: var(--max);
@@ -99,10 +96,7 @@
       margin-bottom: 18px;
       color: var(--text);
     }
-    .hero-title em {
-      font-style: italic;
-      color: var(--accent);
-    }
+    .hero-title em { font-style: italic; color: var(--accent); }
     .hero-sub {
       font-size: 0.85rem;
       color: var(--muted);
@@ -110,7 +104,7 @@
       max-width: 480px;
     }
 
-    /* ─── SECTION SHELL ─────────────────────────────────── */
+    /* SECTIONS */
     section { padding: 120px 64px; max-width: var(--max); margin: 0 auto; }
     .section-label {
       font-size: 0.6rem;
@@ -126,13 +120,9 @@
       line-height: 1.15;
       margin-bottom: 48px;
     }
-    .divider {
-      width: 48px; height: 1px;
-      background: var(--accent);
-      margin: 20px 0 40px;
-    }
+    .divider { width: 48px; height: 1px; background: var(--accent); margin: 20px 0 40px; }
 
-    /* ─── ABOUT ─────────────────────────────────────────── */
+    /* ABOUT */
     #about { scroll-margin-top: var(--nav-h); }
     .about-grid {
       display: grid;
@@ -144,13 +134,14 @@
       aspect-ratio: 3/4;
       background: var(--surface);
       overflow: hidden;
-      /* REPLACE inner content with: <img src="your-portrait.jpg" alt="Your Name" /> */
       display: flex; align-items: center; justify-content: center;
       color: var(--muted); font-size: 0.75rem; letter-spacing: 0.1em;
     }
     .about-photo-frame .placeholder-text { text-align: center; }
+    /* FIX: use actual text color, not near-white from dark theme */
     .about-text p {
-      color: rgba(232,228,220,0.75);
+      color: var(--text);
+      opacity: 0.8;
       margin-bottom: 20px;
       font-size: 0.95rem;
     }
@@ -164,14 +155,9 @@
       line-height: 1.9;
     }
 
-    /* ─── GALLERY ───────────────────────────────────────── */
+    /* GALLERY */
     #gallery { scroll-margin-top: var(--nav-h); }
-
-    /* Category tabs */
-    .gallery-tabs {
-      display: flex; flex-wrap: wrap; gap: 8px;
-      margin-bottom: 48px;
-    }
+    .gallery-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 48px; }
     .tab-btn {
       padding: 8px 20px;
       background: transparent;
@@ -189,8 +175,6 @@
       border-color: var(--accent);
       color: #f5f0e8;
     }
-
-    /* Category section */
     .gallery-category { margin-bottom: 80px; }
     .category-heading {
       font-family: var(--font-head);
@@ -207,8 +191,6 @@
       color: var(--muted);
       margin-bottom: 28px;
     }
-
-    /* Photo grid */
     .photo-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -225,50 +207,47 @@
     .photo-thumb {
       aspect-ratio: 4/3;
       overflow: hidden;
-      background: #111;
+      background: var(--surface);
       position: relative;
     }
-    /* WIDE / PORTRAIT variant helpers */
     .photo-card.wide  .photo-thumb { aspect-ratio: 16/9; }
     .photo-card.tall  .photo-thumb { aspect-ratio: 3/4; }
     .photo-card.square .photo-thumb { aspect-ratio: 1; }
-
     .photo-thumb img { transition: transform 0.55s ease; }
-    /* Placeholder shown when no image is set */
     .photo-thumb .img-placeholder {
       position: absolute; inset: 0;
       display: flex; align-items: center; justify-content: center;
       flex-direction: column; gap: 8px;
-      color: var(--muted); font-size: 0.7rem;
-      letter-spacing: 0.1em;
+      color: var(--muted); font-size: 0.7rem; letter-spacing: 0.1em;
     }
     .img-placeholder svg { opacity: 0.3; }
-
     .photo-info { padding: 16px 18px 20px; }
     .photo-title {
       font-family: var(--font-head);
       font-size: 1.05rem;
       font-weight: 400;
       margin-bottom: 6px;
+      color: var(--text);
     }
+    /* FIX: caption color visible on beige */
     .photo-caption {
       font-size: 0.78rem;
-      color: rgba(232,228,220,0.55);
+      color: var(--muted);
       line-height: 1.65;
     }
     .photo-tag {
       display: inline-block;
       margin-top: 10px;
       padding: 3px 9px;
-      background: rgba(201,169,110,0.12);
-      border: 1px solid rgba(201,169,110,0.25);
+      background: rgba(110,20,35,0.08);
+      border: 1px solid rgba(110,20,35,0.2);
       color: var(--accent);
       font-size: 0.6rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
     }
 
-    /* ─── LIGHTBOX ──────────────────────────────────────── */
+    /* LIGHTBOX */
     .lightbox {
       display: none;
       position: fixed; inset: 0; z-index: 200;
@@ -281,24 +260,18 @@
       position: relative;
       max-width: 920px; width: 100%;
       display: grid; grid-template-columns: 1fr 280px;
-      background: var(--surface);
+      background: var(--bg2);
       overflow: hidden;
     }
-    .lightbox-img {
-      aspect-ratio: 4/3;
-      background: #111;
-    }
+    .lightbox-img { aspect-ratio: 4/3; background: var(--surface); }
     .lightbox-img img { height: 100%; }
     .lightbox-details {
       padding: 32px 28px;
       display: flex; flex-direction: column; gap: 12px;
       overflow-y: auto;
     }
-    .lightbox-title {
-      font-family: var(--font-head);
-      font-size: 1.5rem; font-weight: 400;
-    }
-    .lightbox-caption { font-size: 0.82rem; color: rgba(232,228,220,0.6); line-height: 1.7; }
+    .lightbox-title { font-family: var(--font-head); font-size: 1.5rem; font-weight: 400; color: var(--text); }
+    .lightbox-caption { font-size: 0.82rem; color: var(--muted); line-height: 1.7; }
     .lb-close {
       position: absolute; top: 16px; right: 16px;
       background: none; border: none;
@@ -308,17 +281,16 @@
     }
     .lb-close:hover { color: var(--accent); }
 
-    /* ─── REFLECTION ─────────────────────────────────────── */
+    /* REFLECTION */
     #reflection { scroll-margin-top: var(--nav-h); }
-    .reflection-body {
-      max-width: 720px;
-    }
+    .reflection-body { max-width: 720px; }
+    /* FIX: reflection text visible on beige */
     .reflection-body p {
       font-size: 0.95rem;
-      color: rgba(232,228,220,0.75);
+      color: var(--text);
+      opacity: 0.8;
       margin-bottom: 20px;
     }
-    /* Reflection prompt prompts shown as italics placeholders */
     .reflection-body .prompt {
       font-style: italic;
       color: var(--muted);
@@ -326,38 +298,30 @@
       padding-left: 16px;
       margin-bottom: 16px;
       font-size: 0.8rem;
+      opacity: 1;
     }
 
-    /* ─── CONTACT / FOOTER ───────────────────────────────── */
+    /* FOOTER */
     footer {
       padding: 60px 64px;
       border-top: 1px solid var(--border);
       display: flex; align-items: center; justify-content: space-between;
       flex-wrap: wrap; gap: 20px;
     }
-    .footer-name {
-      font-family: var(--font-head);
-      font-size: 1.1rem; color: var(--text);
-    }
-    .footer-copy {
-      font-size: 0.7rem;
-      letter-spacing: 0.08em;
-      color: var(--muted);
-    }
+    .footer-name { font-family: var(--font-head); font-size: 1.1rem; color: var(--text); }
+    .footer-copy { font-size: 0.7rem; letter-spacing: 0.08em; color: var(--muted); }
     .footer-links { display: flex; gap: 24px; list-style: none; }
     .footer-links a {
-      font-size: 0.65rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--muted);
-      transition: color 0.2s;
+      font-size: 0.65rem; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--muted); transition: color 0.2s;
     }
     .footer-links a:hover { color: var(--accent); }
 
-    /* ─── MOBILE ─────────────────────────────────────────── */
+    /* MOBILE */
     @media (max-width: 768px) {
       nav { padding: 0 24px; }
-      .nav-links { display: none; flex-direction: column; gap: 0;
+      .nav-links {
+        display: none; flex-direction: column; gap: 0;
         position: absolute; top: var(--nav-h); left: 0; right: 0;
         background: var(--bg2); border-bottom: 1px solid var(--border);
         padding: 16px 0;
@@ -377,9 +341,9 @@
 </head>
 <body>
 
-  <!-- ── NAVIGATION ─────────────────────────────────────── -->
+  <!-- NAV -->
   <nav>
-    <a href="#hero" class="nav-logo"></a>
+    <a href="#hero" class="nav-logo">Kedar <span>Haldar</span></a>
     <button class="hamburger" id="hamburger" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -390,54 +354,31 @@
     </ul>
   </nav>
 
-  <!-- ── NAME HEADER ────────────────────────────────────── -->
+  <!-- HERO -->
   <div id="hero">
     <p class="hero-eyebrow">Photography Portfolio</p>
     <h1 class="hero-title">Kedar <em>Haldar</em></h1>
     <p class="hero-sub">Homestead photographer.</p>
   </div>
 
-  <!-- ── ABOUT ──────────────────────────────────────────── -->
+  <!-- ABOUT -->
   <section id="about">
-    <p class="section-label"></p>
+    <p class="section-label">The Photographer</p>
     <h2 class="section-title">About Me</h2>
-
     <div class="about-grid">
-
-      <!-- PROFILE PHOTO -->
       <div class="about-photo-frame">
-        
-          <img src="images/pfp.jpg" alt="Kedar Haldar" />
-        
-        
+        <img src="images/pfp.jpg" alt="Kedar Haldar" />
       </div>
-
-      <!-- BIO TEXT -->
       <div class="about-text">
-        <!--
-          Fill in 2–4 paragraphs below.
-          Tip: answer these prompts —
-            • Who are you as a photographer / artist?
-            • What types of photography interest you most?
-            • Your background & story.
-            • Your perspective / vision.
-        -->
         <p>
-          <!-- PARAGRAPH 1: Introduction -->
           Kedar Haldar is a student at Homestead High School and a passionate photographer with a focus on capturing the beauty in everyday moments.
         </p>
         <p>
-          <!-- PARAGRAPH 2: Background / story -->
-          Write about how you got into photography, what drew you to it, and what you have
-          learned this year.
+          Write about how you got into photography, what drew you to it, and what you have learned this year.
         </p>
         <p>
-          <!-- PARAGRAPH 3: Vision & style -->
-          Describe your photographic eye — the subjects, moods, and techniques that excite you.
-          What do you hope viewers feel when they look at your work?
+          Describe your photographic eye — the subjects, moods, and techniques that excite you. What do you hope viewers feel when they look at your work?
         </p>
-
-        <!-- COPYRIGHT BLOCK — edit name only -->
         <div class="copyright-block">
           Copyright © Kedar Haldar<br>
           All rights reserved<br>
@@ -446,16 +387,14 @@
           of the artist.
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ── GALLERY ─────────────────────────────────────────── -->
+  <!-- GALLERY -->
   <section id="gallery">
     <p class="section-label">Portfolio</p>
     <h2 class="section-title">Gallery</h2>
 
-    <!-- FILTER TABS -->
     <div class="gallery-tabs" id="galleryTabs">
       <button class="tab-btn active" data-cat="all">All</button>
       <button class="tab-btn" data-cat="elements">Elements of Art</button>
@@ -466,239 +405,267 @@
       <button class="tab-btn" data-cat="longexp">Long Exposure</button>
       <button class="tab-btn" data-cat="editing">Photo Editing</button>
       <button class="tab-btn" data-cat="projects">Projects</button>
-      <button class="tab-btn" data-cat="bonus">Bonus</button>
     </div>
 
-    <!-- ── CATEGORY: Elements of Art ───────────────────── -->
+    <!-- ELEMENTS OF ART — 7 cards -->
     <div class="gallery-category" data-cat="elements">
       <h3 class="category-heading">Elements of Art</h3>
       <p class="category-sub">Line · Shape · Form · Value · Color · Texture · Space</p>
       <div class="photo-grid">
 
-        <!-- ─ PHOTO CARD TEMPLATE ─
-             Copy this block for each photo.
-             • Replace src in <img> with your image path (e.g. images/elements/line.jpg)
-             • Fill in title, caption, and tag.
-             • Add class "wide", "tall", or "square" to .photo-card for layout variety.
-             • data-title / data-caption drive the lightbox.
-        ─────────────────────────── -->
-
-        <div class="photo-card"
-             data-title="Photo Title Here"
-             data-caption="Describe the element of art captured, your composition choices, settings used (aperture, ISO, shutter speed), and what you were going for creatively."
-             data-tag="Elements of Art"
-             onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Line" data-caption="Caption about how line is used in this composition." data-tag="Elements of Art" onclick="openLightbox(this)">
           <div class="photo-thumb">
-            <!-- <img src="images/elements/your-photo.jpg" alt="Photo Title Here" /> -->
-            <div class="img-placeholder">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span>Add image</span>
-            </div>
+            <!-- <img src="images/elements/line.jpg" alt="Line" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
           </div>
-          <div class="photo-info">
-            <p class="photo-title">Photo Title Here</p>
-            <p class="photo-caption">Brief caption / artist statement.</p>
-            <span class="photo-tag">Elements of Art</span>
-          </div>
+          <div class="photo-info"><p class="photo-title">Line</p><p class="photo-caption">Caption about line.</p><span class="photo-tag">Elements of Art</span></div>
         </div>
 
-        <!-- Add more .photo-card blocks here… -->
+        <div class="photo-card" data-title="Shape" data-caption="Caption about shape in this composition." data-tag="Elements of Art" onclick="openLightbox(this)">
+          <div class="photo-thumb">
+            <!-- <img src="images/elements/shape.jpg" alt="Shape" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
+          </div>
+          <div class="photo-info"><p class="photo-title">Shape</p><p class="photo-caption">Caption about shape.</p><span class="photo-tag">Elements of Art</span></div>
+        </div>
+
+        <div class="photo-card" data-title="Form" data-caption="Caption about form and three-dimensionality." data-tag="Elements of Art" onclick="openLightbox(this)">
+          <div class="photo-thumb">
+            <!-- <img src="images/elements/form.jpg" alt="Form" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
+          </div>
+          <div class="photo-info"><p class="photo-title">Form</p><p class="photo-caption">Caption about form.</p><span class="photo-tag">Elements of Art</span></div>
+        </div>
+
+        <div class="photo-card" data-title="Value" data-caption="Caption about light, shadow, and tonal range." data-tag="Elements of Art" onclick="openLightbox(this)">
+          <div class="photo-thumb">
+            <!-- <img src="images/elements/value.jpg" alt="Value" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
+          </div>
+          <div class="photo-info"><p class="photo-title">Value</p><p class="photo-caption">Caption about value.</p><span class="photo-tag">Elements of Art</span></div>
+        </div>
+
+        <div class="photo-card" data-title="Color" data-caption="Caption about color palette, mood, and scheme." data-tag="Elements of Art" onclick="openLightbox(this)">
+          <div class="photo-thumb">
+            <!-- <img src="images/elements/color.jpg" alt="Color" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
+          </div>
+          <div class="photo-info"><p class="photo-title">Color</p><p class="photo-caption">Caption about color.</p><span class="photo-tag">Elements of Art</span></div>
+        </div>
+
+        <div class="photo-card" data-title="Texture" data-caption="Caption about surface texture and detail." data-tag="Elements of Art" onclick="openLightbox(this)">
+          <div class="photo-thumb">
+            <!-- <img src="images/elements/texture.jpg" alt="Texture" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
+          </div>
+          <div class="photo-info"><p class="photo-title">Texture</p><p class="photo-caption">Caption about texture.</p><span class="photo-tag">Elements of Art</span></div>
+        </div>
+
+        <div class="photo-card" data-title="Space" data-caption="Caption about negative space and depth." data-tag="Elements of Art" onclick="openLightbox(this)">
+          <div class="photo-thumb">
+            <!-- <img src="images/elements/space.jpg" alt="Space" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
+          </div>
+          <div class="photo-info"><p class="photo-title">Space</p><p class="photo-caption">Caption about space.</p><span class="photo-tag">Elements of Art</span></div>
+        </div>
 
       </div>
     </div>
 
-    <!-- ── CATEGORY: Principles of Design ──────────────── -->
+    <!-- PRINCIPLES OF DESIGN — 2 cards -->
     <div class="gallery-category" data-cat="principles">
       <h3 class="category-heading">Principles of Design</h3>
       <p class="category-sub">Balance · Contrast · Emphasis · Movement · Pattern · Rhythm · Unity</p>
       <div class="photo-grid">
 
-        <!-- Balance photo -->
-        <div class="photo-card"
-             data-title="Balance"
-             data-caption="Describe how you achieved balance in this composition — symmetrical vs asymmetrical, visual weight, etc."
-             data-tag="Principles of Design"
-             onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Balance" data-caption="Describe how you achieved balance in this composition — symmetrical vs asymmetrical, visual weight, etc." data-tag="Principles of Design" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <!-- <img src="images/principles/balance.jpg" alt="Balance" /> -->
-            <div class="img-placeholder">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span>Add image</span>
-            </div>
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
           </div>
-          <div class="photo-info">
-            <p class="photo-title">Balance</p>
-            <p class="photo-caption">Caption about balance…</p>
-            <span class="photo-tag">Principles of Design</span>
-          </div>
+          <div class="photo-info"><p class="photo-title">Balance</p><p class="photo-caption">Caption about balance.</p><span class="photo-tag">Principles of Design</span></div>
         </div>
 
-        <!-- Contrast photo -->
-        <div class="photo-card"
-             data-title="Contrast"
-             data-caption="Explain the contrast at work — light vs dark, color, texture, or subject matter."
-             data-tag="Principles of Design"
-             onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Contrast" data-caption="Explain the contrast at work — light vs dark, color, texture, or subject matter." data-tag="Principles of Design" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <!-- <img src="images/principles/contrast.jpg" alt="Contrast" /> -->
-            <div class="img-placeholder">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span>Add image</span>
-            </div>
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
           </div>
-          <div class="photo-info">
-            <p class="photo-title">Contrast</p>
-            <p class="photo-caption">Caption about contrast…</p>
-            <span class="photo-tag">Principles of Design</span>
-          </div>
+          <div class="photo-info"><p class="photo-title">Contrast</p><p class="photo-caption">Caption about contrast.</p><span class="photo-tag">Principles of Design</span></div>
         </div>
 
       </div>
     </div>
 
-    <!-- ── CATEGORY: A to Z ─────────────────────────────── -->
+    <!-- A TO Z — 1 card -->
     <div class="gallery-category" data-cat="atoz">
       <h3 class="category-heading">A to Z</h3>
       <p class="category-sub">Letters found in the world around us</p>
       <div class="photo-grid">
-        <!-- Add one .photo-card per letter of your name -->
+
+        <div class="photo-card" data-title="Letter" data-caption="Describe the letter found and where/how you spotted it." data-tag="A to Z" onclick="openLightbox(this)">
+          <div class="photo-thumb">
+            <!-- <img src="images/atoz/letter.jpg" alt="Letter" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
+          </div>
+          <div class="photo-info"><p class="photo-title">Letter</p><p class="photo-caption">Caption about this letter.</p><span class="photo-tag">A to Z</span></div>
+        </div>
+
       </div>
     </div>
 
-    <!-- ── CATEGORY: Theme Photos ───────────────────────── -->
+    <!-- THEME — 4 cards -->
     <div class="gallery-category" data-cat="theme">
       <h3 class="category-heading">Theme</h3>
       <p class="category-sub">A unified visual story</p>
       <div class="photo-grid">
-        <!-- Add theme .photo-card blocks here -->
+
+        <div class="photo-card" data-title="Theme Photo 1" data-caption="Describe the theme and how this photo fits into the series." data-tag="Theme" onclick="openLightbox(this)">
+          <div class="photo-thumb">
+            <!-- <img src="images/theme/theme1.jpg" alt="Theme Photo 1" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
+          </div>
+          <div class="photo-info"><p class="photo-title">Theme Photo 1</p><p class="photo-caption">Caption for theme photo 1.</p><span class="photo-tag">Theme</span></div>
+        </div>
+
+        <div class="photo-card" data-title="Theme Photo 2" data-caption="Describe the theme and how this photo fits into the series." data-tag="Theme" onclick="openLightbox(this)">
+          <div class="photo-thumb">
+            <!-- <img src="images/theme/theme2.jpg" alt="Theme Photo 2" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
+          </div>
+          <div class="photo-info"><p class="photo-title">Theme Photo 2</p><p class="photo-caption">Caption for theme photo 2.</p><span class="photo-tag">Theme</span></div>
+        </div>
+
+        <div class="photo-card" data-title="Theme Photo 3" data-caption="Describe the theme and how this photo fits into the series." data-tag="Theme" onclick="openLightbox(this)">
+          <div class="photo-thumb">
+            <!-- <img src="images/theme/theme3.jpg" alt="Theme Photo 3" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
+          </div>
+          <div class="photo-info"><p class="photo-title">Theme Photo 3</p><p class="photo-caption">Caption for theme photo 3.</p><span class="photo-tag">Theme</span></div>
+        </div>
+
+        <div class="photo-card" data-title="Theme Photo 4" data-caption="Describe the theme and how this photo fits into the series." data-tag="Theme" onclick="openLightbox(this)">
+          <div class="photo-thumb">
+            <!-- <img src="images/theme/theme4.jpg" alt="Theme Photo 4" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
+          </div>
+          <div class="photo-info"><p class="photo-title">Theme Photo 4</p><p class="photo-caption">Caption for theme photo 4.</p><span class="photo-tag">Theme</span></div>
+        </div>
+
       </div>
     </div>
 
-    <!-- ── CATEGORY: Macro & Perspective ────────────────── -->
+    <!-- MACRO & PERSPECTIVE — 2 cards -->
     <div class="gallery-category" data-cat="macro">
       <h3 class="category-heading">Macro &amp; Perspective</h3>
       <p class="category-sub">Close-up details and unusual viewpoints</p>
       <div class="photo-grid">
-        <!-- Add macro/perspective .photo-card blocks here -->
+
+        <div class="photo-card" data-title="Macro Shot" data-caption="Describe the subject, how close you got, and what details emerge at this scale." data-tag="Macro &amp; Perspective" onclick="openLightbox(this)">
+          <div class="photo-thumb">
+            <!-- <img src="images/macro/macro1.jpg" alt="Macro Shot" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
+          </div>
+          <div class="photo-info"><p class="photo-title">Macro Shot</p><p class="photo-caption">Caption for macro photo.</p><span class="photo-tag">Macro &amp; Perspective</span></div>
+        </div>
+
+        <div class="photo-card" data-title="Perspective" data-caption="Explain the unusual angle or viewpoint chosen and how it changes the way the subject is perceived." data-tag="Macro &amp; Perspective" onclick="openLightbox(this)">
+          <div class="photo-thumb">
+            <!-- <img src="images/macro/perspective.jpg" alt="Perspective" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
+          </div>
+          <div class="photo-info"><p class="photo-title">Perspective</p><p class="photo-caption">Caption for perspective photo.</p><span class="photo-tag">Macro &amp; Perspective</span></div>
+        </div>
+
       </div>
     </div>
 
-    <!-- ── CATEGORY: Long Exposure ──────────────────────── -->
+    <!-- LONG EXPOSURE — 1 card -->
     <div class="gallery-category" data-cat="longexp">
       <h3 class="category-heading">Long Exposure</h3>
       <p class="category-sub">Time made visible — light trails, motion blur, silky water</p>
       <div class="photo-grid">
-        <!-- Add long exposure .photo-card blocks here -->
+
+        <div class="photo-card wide" data-title="Long Exposure" data-caption="Describe the shutter speed used, what was moving, and the effect it created." data-tag="Long Exposure" onclick="openLightbox(this)">
+          <div class="photo-thumb">
+            <!-- <img src="images/longexp/longexp.jpg" alt="Long Exposure" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
+          </div>
+          <div class="photo-info"><p class="photo-title">Long Exposure</p><p class="photo-caption">Caption for long exposure photo.</p><span class="photo-tag">Long Exposure</span></div>
+        </div>
+
       </div>
     </div>
 
-    <!-- ── CATEGORY: Photo Editing & Illustrations ──────── -->
+    <!-- PHOTO EDITING — 2 cards -->
     <div class="gallery-category" data-cat="editing">
       <h3 class="category-heading">Photo Editing &amp; Illustrations</h3>
-      <p class="category-sub">Kaleidoscope · Partial Desaturation · Composites</p>
+      <p class="category-sub">Kaleidoscope · Partial Desaturation</p>
       <div class="photo-grid">
 
-        <!-- Kaleidoscope -->
-        <div class="photo-card wide"
-             data-title="Kaleidoscope"
-             data-caption="Describe the original photo, the technique used, and the effect you were trying to achieve."
-             data-tag="Photo Editing"
-             onclick="openLightbox(this)">
+        <div class="photo-card wide" data-title="Kaleidoscope" data-caption="Describe the original photo, the technique used, and the effect you were trying to achieve." data-tag="Photo Editing" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <!-- <img src="images/editing/kaleidoscope.jpg" alt="Kaleidoscope" /> -->
-            <div class="img-placeholder">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span>Add image</span>
-            </div>
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
           </div>
-          <div class="photo-info">
-            <p class="photo-title">Kaleidoscope</p>
-            <p class="photo-caption">Caption for your kaleidoscope edit…</p>
-            <span class="photo-tag">Photo Editing</span>
-          </div>
+          <div class="photo-info"><p class="photo-title">Kaleidoscope</p><p class="photo-caption">Caption for kaleidoscope edit.</p><span class="photo-tag">Photo Editing</span></div>
         </div>
 
-        <!-- Partial Desaturation -->
-        <div class="photo-card"
-             data-title="Partial Desaturation"
-             data-caption="Explain your color selection, the mood it creates, and the story behind the photo."
-             data-tag="Photo Editing"
-             onclick="openLightbox(this)">
+        <div class="photo-card" data-title="Partial Desaturation" data-caption="Explain your color selection, the mood it creates, and the story behind the photo." data-tag="Photo Editing" onclick="openLightbox(this)">
           <div class="photo-thumb">
             <!-- <img src="images/editing/desaturation.jpg" alt="Partial Desaturation" /> -->
-            <div class="img-placeholder">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
-              <span>Add image</span>
-            </div>
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
           </div>
-          <div class="photo-info">
-            <p class="photo-title">Partial Desaturation</p>
-            <p class="photo-caption">Caption for your desaturation edit…</p>
-            <span class="photo-tag">Photo Editing</span>
-          </div>
+          <div class="photo-info"><p class="photo-title">Partial Desaturation</p><p class="photo-caption">Caption for desaturation edit.</p><span class="photo-tag">Photo Editing</span></div>
         </div>
 
       </div>
     </div>
 
-    <!-- ── CATEGORY: Projects ────────────────────────────── -->
+    <!-- PROJECTS — 1 card -->
     <div class="gallery-category" data-cat="projects">
       <h3 class="category-heading">Photo Projects</h3>
       <p class="category-sub">Puzzle &amp; multi-part works</p>
       <div class="photo-grid">
-        <!-- Add project .photo-card blocks here -->
-      </div>
-    </div>
 
-    <!-- ── CATEGORY: Bonus ───────────────────────────────── -->
-    <div class="gallery-category" data-cat="bonus">
-      <h3 class="category-heading">Bonus Photos</h3>
-      <p class="category-sub">Personal work outside class assignments</p>
-      <div class="photo-grid">
-        <!-- Add bonus .photo-card blocks here -->
+        <div class="photo-card" data-title="Puzzle Project" data-caption="Describe how the puzzle was constructed, the original image, and what made it interesting to work with." data-tag="Projects" onclick="openLightbox(this)">
+          <div class="photo-thumb">
+            <!-- <img src="images/projects/puzzle.jpg" alt="Puzzle Project" /> -->
+            <div class="img-placeholder"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span>Add image</span></div>
+          </div>
+          <div class="photo-info"><p class="photo-title">Puzzle Project</p><p class="photo-caption">Caption for the puzzle project.</p><span class="photo-tag">Projects</span></div>
+        </div>
+
       </div>
     </div>
 
   </section>
 
-  <!-- ── FINAL REFLECTION ───────────────────────────────── -->
+  <!-- REFLECTION -->
   <section id="reflection" style="background: var(--bg2); max-width: 100%; padding: 120px 64px;">
     <div style="max-width: var(--max); margin: 0 auto;">
       <p class="section-label">End of Year</p>
       <h2 class="section-title">Final Reflection</h2>
       <div class="divider"></div>
-
       <div class="reflection-body">
-
         <p class="prompt">
           Prompt ideas: What did you learn this year? How have your skills grown? What was your
           favorite assignment and why? What would you do differently? What do you want to explore
           next in photography?
         </p>
-
-        <!-- REPLACE the paragraphs below with your actual reflection -->
-        <p>
-          This year in photography I learned…
-        </p>
-        <p>
-          The assignment that challenged me most was…
-        </p>
-        <p>
-          Looking back, I would change…
-        </p>
-        <p>
-          Going forward, I hope to…
-        </p>
-
+        <p>This year in photography I learned…</p>
+        <p>The assignment that challenged me most was…</p>
+        <p>Looking back, I would change…</p>
+        <p>Going forward, I hope to…</p>
       </div>
     </div>
   </section>
 
-  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <!-- FOOTER -->
   <footer>
     <div>
-      <p class="footer-name">Your Name — Photography</p>
-      <p class="footer-copy">© <span id="yr"></span> Your Name. All rights reserved.</p>
+      <p class="footer-name">Kedar Haldar — Photography</p>
+      <p class="footer-copy">© <span id="yr"></span> Kedar Haldar. All rights reserved.</p>
     </div>
     <ul class="footer-links">
       <li><a href="#about">About</a></li>
@@ -707,14 +674,12 @@
     </ul>
   </footer>
 
-  <!-- ── LIGHTBOX ────────────────────────────────────────── -->
+  <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox" onclick="closeLightboxOnBg(event)">
     <div class="lightbox-inner">
       <button class="lb-close" onclick="closeLightbox()">✕</button>
       <div class="lightbox-img" id="lbImg">
-        <div class="img-placeholder" style="height:100%;display:flex;align-items:center;justify-content:center;background:#111;color:#555;font-size:.75rem;">
-          No image
-        </div>
+        <div class="img-placeholder" style="height:100%;display:flex;align-items:center;justify-content:center;color:#8a7060;font-size:.75rem;">No image</div>
       </div>
       <div class="lightbox-details">
         <span class="photo-tag" id="lbTag"></span>
@@ -724,69 +689,50 @@
     </div>
   </div>
 
-  <!-- ── SCRIPTS ────────────────────────────────────────── -->
   <script>
-    // Year in footer
     document.getElementById('yr').textContent = new Date().getFullYear();
 
-    // Mobile nav toggle
     const hamburger = document.getElementById('hamburger');
     const navLinks  = document.getElementById('navLinks');
     hamburger.addEventListener('click', () => navLinks.classList.toggle('open'));
     navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
 
-    // Gallery filter tabs
     const tabs = document.getElementById('galleryTabs');
     const cats = document.querySelectorAll('.gallery-category');
-
     tabs.addEventListener('click', e => {
       const btn = e.target.closest('.tab-btn');
       if (!btn) return;
       tabs.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       const chosen = btn.dataset.cat;
-      cats.forEach(c => {
-        if (chosen === 'all' || c.dataset.cat === chosen) {
-          c.style.display = '';
-        } else {
-          c.style.display = 'none';
-        }
-      });
+      cats.forEach(c => { c.style.display = (chosen === 'all' || c.dataset.cat === chosen) ? '' : 'none'; });
     });
 
-    // Lightbox
     function openLightbox(card) {
       const lb     = document.getElementById('lightbox');
       const imgDiv = document.getElementById('lbImg');
       const srcImg = card.querySelector('img');
-
-      // Build lightbox image
       imgDiv.innerHTML = '';
       if (srcImg) {
         const img = document.createElement('img');
-        img.src = srcImg.src;
-        img.alt = card.dataset.title;
+        img.src = srcImg.src; img.alt = card.dataset.title;
         imgDiv.appendChild(img);
       } else {
-        imgDiv.innerHTML = '<div style="height:100%;display:flex;align-items:center;justify-content:center;background:#111;color:#555;font-size:.75rem;">No image</div>';
+        imgDiv.innerHTML = '<div style="height:100%;display:flex;align-items:center;justify-content:center;color:#8a7060;font-size:.75rem;">No image</div>';
       }
-
       document.getElementById('lbTitle').textContent   = card.dataset.title   || '';
       document.getElementById('lbCaption').textContent = card.dataset.caption || '';
       document.getElementById('lbTag').textContent     = card.dataset.tag     || '';
       lb.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
-
     function closeLightbox() {
       document.getElementById('lightbox').classList.remove('open');
       document.body.style.overflow = '';
     }
-
     function closeLightboxOnBg(e) {
       if (e.target === document.getElementById('lightbox')) closeLightbox();
     }
-
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
   </script>
 
