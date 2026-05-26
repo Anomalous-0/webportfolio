@@ -11,14 +11,14 @@
   <style>
     /* ─── VARIABLES ─────────────────────────────────────── */
     :root {
-      --bg:        #0e0e0e;
-      --bg2:       #161616;
-      --surface:   #1e1e1e;
-      --border:    rgba(255,255,255,0.08);
-      --text:      #e8e4dc;
-      --muted:     #888;
-      --accent:    #c9a96e;       /* warm gold */
-      --accent2:   #8aabb0;       /* muted teal */
+      --bg:        #f5f0e8;
+      --bg2:       #ede7da;
+      --surface:   #e8e0d0;
+      --border:    rgba(90,30,40,0.12);
+      --text:      #2a1018;
+      --muted:     #8a7060;
+      --accent:    #6e1423;       /* deep maroon */
+      --accent2:   #a03040;       /* lighter maroon */
       --font-head: 'Cormorant Garamond', serif;
       --font-body: 'Raleway', sans-serif;
       --nav-h:     64px;
@@ -45,7 +45,7 @@
       height: var(--nav-h);
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 48px;
-      background: rgba(14,14,14,0.85);
+      background: rgba(245,240,232,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
       z-index: 100;
@@ -76,58 +76,38 @@
       background: var(--text); transition: all 0.3s;
     }
 
-    /* ─── HERO ──────────────────────────────────────────── */
+    /* ─── NAME HEADER ───────────────────────────────────── */
     #hero {
-      position: relative;
-      height: 100svh;
-      display: flex; align-items: flex-end;
-      padding: 0 64px 80px;
-      overflow: hidden;
-    }
-    /* ↓ Replace this gradient with your banner <img> */
-    .hero-bg {
-      position: absolute; inset: 0;
-      background: linear-gradient(160deg, #1a1a2e 0%, #16213e 40%, #0f3460 100%);
-      /* REPLACE with: <img src="your-banner.jpg" alt="" /> */
-    }
-    .hero-bg::after {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 60%);
-    }
-    .hero-content {
-      position: relative; z-index: 1;
-      max-width: 680px;
+      padding: calc(var(--nav-h) + 72px) 64px 72px;
+      max-width: var(--max);
+      margin: 0 auto;
+      border-bottom: 1px solid var(--border);
     }
     .hero-eyebrow {
-      font-size: 0.65rem;
-      letter-spacing: 0.28em;
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
       color: var(--accent);
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .hero-title {
       font-family: var(--font-head);
-      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      font-size: clamp(3rem, 7vw, 6.5rem);
       font-weight: 300;
-      line-height: 1.05;
-      margin-bottom: 20px;
+      line-height: 1.0;
+      letter-spacing: -0.01em;
+      margin-bottom: 18px;
+      color: var(--text);
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--accent);
     }
     .hero-sub {
-      font-size: 0.9rem;
-      color: rgba(232,228,220,0.65);
-      letter-spacing: 0.04em;
-    }
-    .scroll-hint {
-      position: absolute; bottom: 28px; right: 64px;
-      display: flex; align-items: center; gap: 10px;
-      font-size: 0.6rem; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--muted);
-    }
-    .scroll-hint::before {
-      content: '';
-      display: block; width: 40px; height: 1px;
-      background: var(--accent);
+      font-size: 0.85rem;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      max-width: 480px;
     }
 
     /* ─── SECTION SHELL ─────────────────────────────────── */
@@ -207,7 +187,7 @@
     .tab-btn:hover, .tab-btn.active {
       background: var(--accent);
       border-color: var(--accent);
-      color: #0e0e0e;
+      color: #f5f0e8;
     }
 
     /* Category section */
@@ -292,7 +272,7 @@
     .lightbox {
       display: none;
       position: fixed; inset: 0; z-index: 200;
-      background: rgba(0,0,0,0.92);
+      background: rgba(42,16,24,0.93);
       align-items: center; justify-content: center;
       padding: 32px;
     }
@@ -385,7 +365,7 @@
       .nav-links.open { display: flex; }
       .nav-links li a { display: block; padding: 12px 24px; }
       .hamburger { display: flex; }
-      #hero { padding: 0 24px 60px; }
+      #hero { padding: calc(var(--nav-h) + 40px) 24px 48px; }
       section { padding: 80px 24px; }
       .about-grid { grid-template-columns: 1fr; gap: 40px; }
       .photo-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 16px; }
@@ -410,21 +390,11 @@
     </ul>
   </nav>
 
-  <!-- ── HERO ───────────────────────────────────────────── -->
+  <!-- ── NAME HEADER ────────────────────────────────────── -->
   <div id="hero">
-    <div class="hero-bg">
-      <!--
-        REPLACE this entire <div class="hero-bg"> block with:
-        <img src="images/banner.jpg" alt="Hero banner" />
-        and keep the ::after overlay in CSS.
-      -->
-    </div>
-    <div class="hero-content">
-      <p class="hero-eyebrow">Photography Portfolio</p>
-      <h1 class="hero-title">Your Name<br>Here</h1>
-      <p class="hero-sub">Brief tagline — what drives you behind the lens.</p>
-    </div>
-    <p class="scroll-hint">Scroll to explore</p>
+    <p class="hero-eyebrow">Photography Portfolio</p>
+    <h1 class="hero-title">Your <em>Name</em><br>Here</h1>
+    <p class="hero-sub">Brief tagline — what drives you behind the lens.</p>
   </div>
 
   <!-- ── ABOUT ──────────────────────────────────────────── -->
